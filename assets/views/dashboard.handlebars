@@ -1,0 +1,103 @@
+   <div id="dashboard" class="section">
+        <h1>Ferrari Garage Dashboard</h1>
+        <p>Os maiores colecionadores de carros do mundo possuem garagens que mais parecem museus. Entre eles, Jay Leno e Ralph Lauren destacam-se não apenas pelo número de carros, mas pela raridade e exclusividade das suas coleções. Carros como o Ferrari 250 GTO, que vale milhões, são joias disputadas. Outro exemplo é o McLaren F1 LM, que é frequentemente encontrado entre os mais cobiçados.
+        </p>
+        <p>Os carros mais raros do mundo incluem peças únicas como o Bugatti La Voiture Noire e o Rolls-Royce Boat Tail, verdadeiras obras de arte em formato de veículo. Esses modelos não apenas representam luxo, mas também inovação tecnológica e design revolucionário.</p>
+        <a href="/grandPrix"><button class="button-led">Acessar a garagem do Roma</button></a>
+    </div>
+
+    <style>
+        /* Estilização para o dashboard da Ferrari Garage */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212; /* Fundo preto elegante */
+    color: #eaeaea; /* Texto claro */
+}
+
+.section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(33, 37, 41, 1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ff0000; /* Vermelho Ferrari */
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #cccccc; /* Texto secundário */
+}
+
+.button-led {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #121212;
+    background: #ff0000; /* Vermelho Ferrari */
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: transform 0.3s ease;
+}
+
+.button-led:hover {
+    transform: scale(1.05);
+}
+
+.button-led:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 0, 0, 0.5), rgba(255, 255, 255, 0.3));
+    z-index: 0;
+    transition: all 0.3s ease;
+}
+
+.button-led:hover:before {
+    left: 0%;
+}
+
+.button-led span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .section {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .button-led {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+    </style>
