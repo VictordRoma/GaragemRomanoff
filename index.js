@@ -12,9 +12,7 @@ import isLogged from './app/helpers/isLogged.js';
 
 //Routers
 import AuthRouter from "./app/routes/authRouter.js";
-import grandPrixRouter from './app/routes/grandPrixRouter.js';
-import pilotRouter from './app/routes/pilotRouter.js';
-import teamRouter from './app/routes/teamRouter.js';
+import carRouter from './app/routes/carRouter.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 8080;
@@ -61,13 +59,7 @@ app.use(cookieParser());
 app.use('/', AuthRouter.getRouter());
 
 //GRANDPRIX
-app.use('/', grandPrixRouter.getRouter());
-
-//PILOT
-app.use('/', pilotRouter.getRouter());
-
-//TEAM
-app.use('/', teamRouter.getRouter());
+app.use('/', carRouter.getRouter());
 
 
 //INDEX

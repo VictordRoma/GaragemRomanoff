@@ -1,41 +1,16 @@
 <!-- Index Page -->
 <section class="index">
     <h2>Garagem Romanoff</h2>
-    <div class="car-card">
-        <h3>Ferrari Roma</h3>
-        <p>Model: Roma</p>
-        <p>Brand: Ferrari</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    </div>
-    <div class="car-card">
-        <h3>Ferrari Roma</h3>
-        <p>Model: Roma</p>
-        <p>Brand: Ferrari</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    </div>
-    <div class="car-card">
-        <h3>Ferrari Roma</h3>
-        <p>Model: Roma</p>
-        <p>Brand: Ferrari</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    </div>
-    <div class="car-card">
-        <h3>Ferrari Roma</h3>
-        <p>Model: Roma</p>
-        <p>Brand: Ferrari</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    </div>
-    <div class="car-card">
-        <h3>Ferrari Roma</h3>
-        <p>Model: Roma</p>
-        <p>Brand: Ferrari</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    </div>
+    <button class="edit-btn" onclick="window.location='/cars/create'">Adicionar Carro</button>
+    {{#each cars}}
+        <div class="car-card">
+            <h3>{{nome}}</h3>
+            <p>Model: {{modelo}}</p>
+            <p>Brand: {{marca}}</p>
+            <button class="edit-btn" onclick="window.location='/cars/edit/{{id}}'">Edit</button>
+            <button class="delete-btn" onclick="deletarCarro('{{id}}')">Delete</button>
+        </div>
+    {{/each}}
 </section>
 
 <style>
@@ -135,3 +110,30 @@ body {
     }
 }
 </style>
+
+<script>
+    function deletarCarro(key) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, Excluir!',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/cars/delete/${key}`, {
+                    method: 'DELETE'
+                }).then(() => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                });
+            }
+        });
+    }
+</script>

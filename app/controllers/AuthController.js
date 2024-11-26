@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updatePassword } from "../config/firebase.js";
+import { admin, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updatePassword } from "../config/firebase.js";
 
 
 
@@ -163,35 +163,35 @@ class AuthController
 
 
 
-  alterPassword(req, res) 
+  async alterPassword(req, res) 
   {
-    const { email, oldPassword, newPassword } = req.body;
+    const { password, password_confirmation } = req.body;
 
-    if (!email || !newPassword || !oldPassword) {
+    if (!password || !password_confirmation) {
       req.session.error = 'Campos Vázios!';
 
       return res.redirect("/profile");
     }
 
-    if(newPassword.length < 6){
-      req.session.error = 'A Senha deve ter no mínimo 6 caracteres!';
+    if(password !== password_confirmation){
+      req.session.error = 'As senhas não Conferem!';
 
       return res.redirect("/profile");
     }
 
-    if(newPassword !== oldPassword){
-      req.session.error = 'As Senhas não Conferem!';
+    try{
+      await admin.auth().updateUser(req.decodedToken.uid, {
+        password: password
+      });
 
-      return res.redirect("/profile");
-    }
-
-    updatePassword(user, newPassword).then(() => {
       req.session.success = 'Senha Alterada com Sucesso!';
-      res.redirect("/profile");
-    }).catch(error => {
-      console.error(error);
-      res.render("errors/error", {layout: "guest", codError: "500", textError: 'Erro no Servidor!'});
-    });
+    }
+    catch(e){
+      req.session.error = 'Ocorreu um Erro';
+      console.error(e)
+    }
+
+    return res.redirect("/profile");
   }
 }
 
